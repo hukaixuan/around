@@ -1,4 +1,4 @@
-# encoding:utf8
+# coding:utf-8
 from math import radians, cos, sin, asin, sqrt  
 
 # 根据经纬度计算两点间距离

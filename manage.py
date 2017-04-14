@@ -1,4 +1,4 @@
-# encoding:utf8
+# coding:utf-8
 import os
 from app import create_app, db
 # from app.models import User, Post, Label
