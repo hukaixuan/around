@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.13)
 # Database: around
-# Generation Time: 2017-04-14 12:26:12 +0000
+# Generation Time: 2017-04-14 12:52:49 +0000
 # ************************************************************
 
 
@@ -18,6 +18,51 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table comment
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `comment`;
+
+CREATE TABLE `comment` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `content` text,
+  `timestamp` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+
+INSERT INTO `comment` (`id`, `post_id`, `user_id`, `content`, `timestamp`)
+VALUES
+	(1,22,5,'wooooo!\r\ngoooood!!','2017-04-11 02:07:34'),
+	(3,21,5,'googoijjjeré','2017-04-11 02:09:47'),
+	(4,16,5,'没有','2017-04-11 02:10:57'),
+	(5,20,5,'好啊啊啊?','2017-04-11 02:24:07'),
+	(6,20,5,'啥时候有空？','2017-04-11 02:24:19'),
+	(7,20,5,'不好！！！Noooooo','2017-04-11 02:37:38'),
+	(8,21,5,'亮亮亮亮亮亮','2017-04-11 02:38:32'),
+	(9,21,5,'lllllllll','2017-04-11 02:39:54'),
+	(10,21,5,'?','2017-04-11 02:40:00'),
+	(11,19,5,'hello','2017-04-11 02:40:27'),
+	(12,19,5,'world','2017-04-11 02:40:33'),
+	(13,19,5,'hkx','2017-04-11 02:40:36'),
+	(14,22,5,' ?','2017-04-11 02:44:00'),
+	(15,22,5,'?','2017-04-11 02:44:06'),
+	(16,27,5,'好啊啊啊啊啊啊啊啊?','2017-04-12 07:21:10'),
+	(17,27,5,'不过。。。','2017-04-12 07:21:18'),
+	(18,20,5,'?','2017-04-12 13:30:04'),
+	(19,16,8,'有啊','2017-04-12 13:33:50'),
+	(20,16,8,'没有','2017-04-12 13:34:02'),
+	(21,21,8,'加我微信，96481878','2017-04-12 13:36:04'),
+	(22,20,4,'hahahhaaa','2017-04-13 00:53:06');
+
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table label
