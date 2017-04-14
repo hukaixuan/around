@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+<div class="container">
+	<hr>
+	<div class="post">
+		<div class="post-thumbnail">
+			<a href="{{url_for('main.user', name=post.user.name)}}">
+				<img class="img-rounded profile-thumbnail" src="{{url_for('static', filename=post.user.pic)}}" width="30" height="30" alt="">
+			</a>
+		</div>
+		<div class="post-content">
+			<div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>
+	            <div class="post-author">{{post.user.name}}</div>
+	            <div class="post-body">
+	                <span class="glyphicon glyphicon-tag" aria-hidden="true">
+	                {{ post.label.name }}
+	                <br>
+	                <br>
+	                <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
+	                {{ post.content }}
+	            </div>
+		</div>
+	</div>
+	<hr>
+	<div class="col-md-4">
+	{% if current_user.is_authenticated %}
+		{{ wtf.quick_form(form) }}
+	{% else %}
+		<span>登录后发表评论</span>
+	{% endif %}
+	</div>
+	<hr>
+	评论：
+	{% for comment in comments %}
+	<li class="post">
+	        <div class="post-thumbnail">
+	            <a href="{{url_for('main.user', name=comment.user.name)}}">
+	                <img class="img-rounded profile-thumbnail" src="{{url_for('static', filename=comment.user.pic)}}" width="30" height="30">
+	            </a>
+	        </div>
+	        <div class="post-content">
+	            <div class="post-date">{{ moment(comment.timestamp).fromNow() }}</div>
+	            <div class="post-author">{{comment.user.name}}</div>
+	            <div class="post-body">
+	                <br>
+	                <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
+	                {{ comment.content }}
+	            </div>
+	        </div>
+	        <div class="post-footer">
+                {% if current_user.id == comment.user_id %}
+                <a href="{{url_for('main.edit_comment', id=comment.id)}}">
+                    <span class="label label-primary">编辑</span>
+                </a>
+                <a href="{{url_for('main.delete_comment', id=comment.id)}}">
+                    <span class="label label-danger">删除</span>
+                </a>
+                {% endif %}
+            </div>
+	    </li>
+	{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Around{% endblock %}
+
+{% block head %}
+{{super()}}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+
+{% block navbar %}
+<div class="btn-group btn-group-justified" role="group" aria-label="..." style="z-index: 1">
+  <div class="btn-group" role="group">
+    <a href="{{url_for('main.index')}}">
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"> 邀约地图</button>
+    </a>
+  </div>
+  <div class="btn-group" role="group">
+    <a href="{{url_for('main.search')}}">
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"> 邀约查找</button>
+    </a>
+  </div>
+  <div class="btn-group" role="group">
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main.user', name=current_user.name) }}"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"> {{current_user.name}}</button></a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"> 登录</button></a>
+    {% endif%}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{{ moment.lang("zh-CN") }}
+{% endblock %}
+
+
+
+
+
+
