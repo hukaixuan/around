@@ -1,3 +1,4 @@
+# encoding:utf8
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextAreaField, SelectField, DateTimeField

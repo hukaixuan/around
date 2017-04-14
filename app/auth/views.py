@@ -1,3 +1,4 @@
+# encoding:utf8
 from flask import render_template, redirect, request, flash, url_for
 from . import auth		# blueprint
 from flask_login import login_required, login_user, logout_user, current_user
