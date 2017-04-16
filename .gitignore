@@ -1,4 +1,8 @@
 .DS_Store
 venv/
 __pycache__/
-config.py
+config.ini
+supervisord.pid
+supervisord.log
+supervisor.conf
+logs/
