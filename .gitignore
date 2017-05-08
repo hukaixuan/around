@@ -6,3 +6,4 @@ supervisord.pid
 supervisord.log
 supervisor.conf
 logs/
+app/static/pic/
