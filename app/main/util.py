@@ -1,5 +1,6 @@
 # coding:utf-8
 from math import radians, cos, sin, asin, sqrt  
+from PIL import Image
 
 # 根据经纬度计算两点间距离
 def get_distance(lon1, lat1, lon2, lat2): # 经度1，纬度1，经度2，纬度2 （十进制度数）  
@@ -20,3 +21,10 @@ def get_distance(lon1, lat1, lon2, lat2): # 经度1，纬度1，经度2，纬度
     c = 2 * asin(sqrt(a))   
     r = 6371 # 地球平均半径，单位为公里  
     return c * r * 1000  
+
+def process_img(img_dir):
+    img = Image.open(img_dir)
+    size = (1024, 1024)
+    img.thumbnail(size)
+    if img.save(img_dir):
+        return True

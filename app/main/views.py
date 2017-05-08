@@ -11,7 +11,7 @@ import time
 import hashlib
 from datetime import datetime
 
-# from .util import get_distance
+from .util import process_img
 
 @main.route('/')
 def index():
@@ -44,6 +44,7 @@ def edit_profile():
 			pic_path = os.path.join(current_app.config['PIC_PATH'], filename)
 			pic_save = os.path.join(current_app.root_path, 'static', pic_path)
 			f.save(pic_save)
+			process_img(pic_save)
 			current_user.pic = pic_path
 			
 		current_user.describe = form.describe.data
@@ -57,7 +58,8 @@ def edit_profile():
 			wechat_qr_path = os.path.join(current_app.config['PIC_PATH'], filename)
 			# 图片保存路径
 			wechat_qr_save = os.path.join(current_app.root_path, 'static', wechat_qr_path)
-			f.save(wechat_qr_save)		
+			f.save(wechat_qr_save)	
+			process_img(wechat_qr_save)	
 			current_user.wechat_qr = wechat_qr_path
 			
 		db.session.add(current_user)
