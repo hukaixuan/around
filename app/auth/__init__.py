@@ -7,6 +7,6 @@ from . import views
 
 from .. import db
 
-@auth.teardown_appcontext
-def shutdown_session(exception=None):
-    db.session.remove()
+# @auth.teardown_appcontext
+# def shutdown_session(exception=None):
+#     db.session.remove()
