@@ -63,7 +63,10 @@ def edit_profile():
 			current_user.wechat_qr = wechat_qr_path
 			
 		db.session.add(current_user)
-		db.session.commit()  # 立即提交
+		try:
+			db.session.commit()
+		except:
+			db.session.rollback()
 		return redirect(url_for('.user', name=current_user.name))
 	form.name.data = current_user.name
 	form.pic.data = current_user.pic
@@ -92,7 +95,10 @@ def get_post(id):
 		comment = Comment(post_id=post.id, user_id=current_user.id,\
 					 content=content, timestamp=datetime.utcnow())
 		db.session.add(comment)
-		db.session.commit()
+		try:
+			db.session.commit()
+		except:
+			db.session.rollback()
 		return redirect(url_for('main.get_post', id=post.id))
 	comments = Comment.query.filter_by(post_id=post.id).order_by(Comment.timestamp.desc()).all()
 	return render_template('get_post.html', post=post, comments=comments, form=form)
@@ -108,7 +114,10 @@ def post():
 			longitude= session.get('longitude'), latitude= session.get('latitude'),
 			user_id=current_user.id, timestamp=datetime.utcnow())
 		db.session.add(post)
-		db.session.commit()
+		try:
+			db.session.commit()
+		except:
+			db.session.rollback()
 		return redirect(url_for('main.index'))
 	return render_template('post.html', form=form)
 
@@ -122,7 +131,10 @@ def edit_post(post_id):
 		post.label_id = form.label.data
 		post.content = form.content.data
 		db.session.add(post)
-		db.session.commit()
+		try:
+			db.session.commit()
+		except:
+			db.session.rollback()
 		flash('修改成功')
 		return redirect(url_for('main.user', name=current_user.name))
 	form.label.data = post.label_id
@@ -135,7 +147,10 @@ def delete_post(post_id):
 	if current_user.id != post.user_id:
 		abort(403)
 	db.session.delete(post)
-	db.session.commit()
+	try:
+		db.session.commit()
+	except:
+		db.session.rollback()
 	return redirect(url_for('main.user', name = current_user.name))
 
 @main.route('/edit_comment/<int:id>', methods=['GET', 'POST'])
@@ -147,7 +162,10 @@ def edit_comment(id):
 	if form.validate_on_submit():
 		comment.content = form.content.data
 		db.session.add(comment)
-		db.session.commit()
+		try:
+			db.session.commit()
+		except:
+			db.session.rollback()
 		return redirect(url_for('main.get_post', id=comment.post.id))
 	form.content.data = comment.content
 	return render_template('edit_comment.html', form=form)
@@ -159,7 +177,10 @@ def delete_comment(id):
 		abort(403)
 	id = comment.post.id
 	db.session.delete(comment)
-	db.session.commit()
+	try:
+		db.session.commit()
+	except:
+		db.session.rollback()
 	return redirect(url_for('main.get_post', id=id))
 
 @main.route('/search')

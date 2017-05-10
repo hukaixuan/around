@@ -38,7 +38,11 @@ def register():
 		user = User(name=form.name.data, 
 					password=form.password.data)
 		db.session.add(user)
-		db.session.commit()		# 要立即提交数据库，因为后面的操作需要提交后自动生成的 id 字段
+		# db.session.commit()		# 要立即提交数据库，因为后面的操作需要提交后自动生成的 id 字段
+		try:
+			db.session.commit()
+		except:
+			db.session.rollback()
 		return redirect(url_for('auth.login'))
 	return render_template('auth/register.html', form=form)
 
