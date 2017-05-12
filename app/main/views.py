@@ -15,7 +15,10 @@ from .util import process_img
 
 @main.route('/')
 def index():
-	posts = Post.query.all()
+	try:
+		posts = Post.query.all()
+	except Exception as e:
+		db.session.rollback()
 	return render_template('index.html', posts=posts)
 
 @main.route('/save_location', methods=['POST'])
@@ -27,8 +30,11 @@ def save_location():
 
 @main.route('/user/<name>')
 def user(name):
-	user = User.query.filter_by(name=name).first_or_404()
-	posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
+	try:
+		user = User.query.filter_by(name=name).first_or_404()
+		posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
+	except Exception as e:
+		db.session.rollback()
 	return render_template('user.html', user=user, posts=posts)
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
