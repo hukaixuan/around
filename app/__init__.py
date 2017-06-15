@@ -24,7 +24,7 @@ def create_app(config_name):
 	ctx.push()
 
 	app.config.from_object(config[config_name])	# 从config.py根据传入的config_name选取对应的class进行配置
-	config[config_name].init_app(app)	#init_app是干啥的？？？啥作用？
+	config[config_name].init_app(app)	
 	bootstrap.init_app(app)
 	db.init_app(app)
 	moment.init_app(app)

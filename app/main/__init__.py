@@ -11,6 +11,6 @@ from .. import db
 def inject_func():
 	return dict(get_distance=util.get_distance)	# 根据经纬度信息计算两点间距离
 
-@main.teardown_appcontext
+@main.teardown_app_request
 def shutdown_session(exception=None):
     db.session.remove()
