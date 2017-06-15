@@ -1,9 +1,11 @@
 .DS_Store
 venv/
+.env/
 __pycache__/
 config.ini
 supervisord.pid
 supervisord.log
 supervisor.conf
+uwsgi.ini
 logs/
 app/static/pic/
