@@ -5,7 +5,8 @@ class Config:
 	SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
-	SQLALCHEMY_DATABASE_URI = 'mysql://root:'+os.environ.get('MYSQL_PWD')+'@localhost/around?charset=utf8mb4'
+	SQLALCHEMY_DATABASE_URI = 'mysql://root:'+os.environ.get('MYSQL_PWD')+'@localhost/around?charset=utf8mb4' \
+								if os.environ.get('MYSQL_PWD') else ''
 	PIC_PATH = 'pic'	# 用户上传头像路径
 	# MYSQL_DATABASE_CHARSET = 'utf8mb4'
 
