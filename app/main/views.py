@@ -18,6 +18,9 @@ def index():
 	try:
 		posts = Post.query.all()
 	except Exception as e:
+		print('*'*50)
+		print(str(e))
+		print('*'*50)
 		db.session.rollback()
 	return render_template('index.html', posts=posts)
 
